@@ -13,9 +13,12 @@ pts_image2 = np.array([[0, 0], [w-1, 0], [w-1, h-1], [0, h-1]])
 image_path1 = "./images/book1.jpg"
 image1 = cv2.imread(image_path1)
 pts_image1 = np.array([[318, 256], [534, 372], [316, 670], [73, 473]])
+'''
+left-up, right-up, right-bottom, left-bottom
+'''
 
-h, status = cv2.findHomography(pts_image2, pts_image1)
-warped_image = cv2.warpPerspective(image2, h, (image1.shape[1], image1.shape[0]))
+homo, status = cv2.findHomography(pts_image2, pts_image1)
+warped_image = cv2.warpPerspective(image2, homo, (image1.shape[1], image1.shape[0]))
 
 image1_mask = cv2.fillConvexPoly(image1, pts_image1, color=(0,0,0))
 
